@@ -1,4 +1,4 @@
-package com.concretepage.exception;
+package com.example.cardealer.exception;
 
 import java.util.Date;
 

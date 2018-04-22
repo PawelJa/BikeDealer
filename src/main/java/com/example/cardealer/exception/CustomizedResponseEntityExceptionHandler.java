@@ -1,6 +1,7 @@
-package com.concretepage.exception;
+package com.example.cardealer.exception;
 
 import com.concretepage.entity.BookNotFoundException;
+import com.example.cardealer.entity.BikeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,8 +23,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(BookNotFoundException.class)
-    public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(BookNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(BikeNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(BikeNotFoundException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
