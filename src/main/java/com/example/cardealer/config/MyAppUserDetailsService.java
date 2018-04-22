@@ -1,7 +1,8 @@
-package com.concretepage.config;
+package com.example.cardealer.config;
 
-import java.util.Arrays;
-
+import com.concretepage.dao.IUserInfoDAO;
+import com.concretepage.entity.UserInfo;
+import com.example.cardealer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,12 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.concretepage.dao.IUserInfoDAO;
-import com.concretepage.entity.UserInfo;
+import java.util.Arrays;
+
 @Service
 public class MyAppUserDetailsService implements UserDetailsService {
 	@Autowired
-	private IUserInfoDAO userInfoDAO;
+	private UserRepository userRepository;
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
