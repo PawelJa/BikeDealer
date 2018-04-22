@@ -1,4 +1,4 @@
-package com.concretepage.dto;
+package com.example.cardealer.dto;
 
 import java.awt.*;
 
