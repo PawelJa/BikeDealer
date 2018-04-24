@@ -1,0 +1,97 @@
+To run api:
+
+1. Create schema with "Dump20180424.sql" . It has necessary script to create database, tables and data to show how my Api works.
+
+2. Please, complete data to connect Api with created database. In file "src/main/resources/application.properties" complete line:
+- spring.datasource.username= /usernameToConnectWithDataBase/
+- spring.datasource.password= /passwordToConnectWithDataBase/
+
+	Default port for JDBC is 3306
+
+3. Please, run terminal and change folder to main of Api.
+
+4. Run Api with command: mvn spring-boot:run
+	Defaul port for api is 8080
+
+5. To verify api urls can be used Postman.
+
+	Please, use:
+	Authorization type - Basic Auth
+	Headers:
+		Accept - application/json
+		Content-Type - application/json
+
+	To authorization are available list of users:
+	login: admin
+	password: m123
+	role: ADMIN
+
+	login: mod
+	password: m123
+	role: MOD
+
+	login: user
+	password: t123
+	role: USER
+
+6.URLS:
+	Bike:
+-GET localhost:8080/bike/
+	return list of bikes
+	for any role
+	for user url return list of available bikes
+	for moderator or admin url return list of bike with any status
+-POST localhost:8080/bike/
+	to add new bike to DB
+	for admin
+-PUT localhost:8080/bike/{id}
+	to edit existing bike
+	for admin and moderator
+-DEL localhost:8080/bike/{id}
+	to delete existing bike
+	for admin
+-GET localhost:8080/bike/{id}
+	to show bike details with {id}
+	for any role
+-GET localhost:8080/bike/brand/{brand}/status/{status}
+	to show sorted list of bikes with brand={brand} and status={status} by price, highest first
+	for moderator and admin
+	to find object used HQL
+-GET localhost:8080/bike/susType/{susType}/status/{status}
+	to show sorted list of bikes with susType={susType} and status={status} by wheelSize, lowest first
+	for moderator and admin
+	to find object used HQL
+
+	BikeDealer:
+-GET localhost:8080/bikeDealer/
+	to show list of bikeDealers
+	for admin
+-POST localhost:8080/bikeDealer/
+	to add new bikeDealer
+	for admin
+-PUT localhost:8080/bikeDealer/{id}
+	to edit existing bikeDealer
+	for admin
+
+-GET localhost:8080/bikeDealer/{id}
+	to sorted show details of bikeDealer with id={id} and list with available bikes by price, lowest first
+	used native query
+	for user
+-GET localhost:8080/bikeDealer/{id}/status/{status}
+	to show details of bikeDealer with id={id} and sorted list of bikes with status={status} by brand (A->Z), if {status}=all it shows list with any status
+	used native query
+	for admin and user
+-GET localhost:8080/bikeDealer/nameLike/{namePart}
+	to show sorted list of bikeDealer contains {namePart} with bikes list only with available bikes (if bikeDealer has no available bikes it will be hidden), list of bikeDealers sorted by bike list size; bigger offer first
+	used Repository
+	for any role
+
+-POST localhost:8080/bikeDealer/{bikeDelaerId}/{bikeId}
+	to add bike with id={bikeId} to bikeDealer offer list with id={bikeDealerId}
+	for admin
+
+------------------------
+
+I used HQL, nativeQuery, and own names of methods in interface of repository to shows few ways how can we get a data
+To sort object by field, I used lambda
+Spring Security employs @PreAuthorize
